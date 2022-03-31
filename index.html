@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Infinite Scroll</title>
+    <style>
+        #infinite-scroll {
+            width: 200px;
+            height: 300px;
+            overflow: auto;
+            margin: 30px;
+            padding: 20px;
+            border: 10px solid black;
+        }
+
+        li {
+            padding: 10px;
+            list-style-type: none;
+        }
+
+        li:hover {
+            background: #ccc;
+        }
+    </style>
+</head>
+
+<body >
+    <div  id="infinite-scroll">
+        <!-- <ul id="infinite-scroll"></ul> -->
+    </div>
+    <script>
+        var ele = document.getElementById("infinite-scroll");
+
+        var nextItem = 1;
+        var loadMore = function () {
+            for (var i = 0; i < 25; i++) {
+                var item = document.createElement("li");
+                item.innerText = "Item " + nextItem++;
+                ele.appendChild(item);
+            }
+        };
+
+        ele.addEventListener("scroll", function () {
+            console.log(ele.scrollTop+ele.clientHeight,ele.scrollHeight)
+
+            if (ele.scrollTop + ele.clientHeight >= ele.scrollHeight) {
+                loadMore();
+            }
+        });
+
+        loadMore();
+    </script>
+</body>
+
+</html>
